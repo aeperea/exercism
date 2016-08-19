@@ -8,13 +8,11 @@ class Squares
   end
 
   def sum_of_squares
-    return 0 if @num == 0
-    (1..@num).to_a.map{ |n| n**2 }.reduce(:+)
+    (0..@num).to_a.map{ |n| n**2 }.reduce(:+)
   end
 
   def square_of_sum
-    return 0 if @num == 0
-    (1..@num).reduce(:+)**2
+    (0..@num).reduce(:+)**2
   end
 end
 

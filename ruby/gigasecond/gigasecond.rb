@@ -1,6 +1,6 @@
 class Gigasecond
   def self.from(time)
-    Time.at(time.to_i + 1e9.to_i)
+    time + 1e9.to_i
   end
 end
 

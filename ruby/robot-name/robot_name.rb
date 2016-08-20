@@ -1,5 +1,6 @@
 class Robot
   attr_reader :name
+  @names_list = []
 
   def initialize
     reset
@@ -10,8 +11,19 @@ class Robot
   end
 
   def generate_name
-    (0..1).map {('A'..'Z').to_a[rand(26)]}.join <<
-    (0..2).map {(0..9).to_a[rand(10)]}.join
+    Kernel.srand
+    new_name = [*("A".."Z")].sample(2).join << rand(1000).to_s
+
+    if self.class.names_list.include?(new_name)
+      generate_name
+    else
+      self.class.names_list << new_name
+    end
+    new_name
+  end
+
+  def self.names_list
+    @names_list
   end
 
 end

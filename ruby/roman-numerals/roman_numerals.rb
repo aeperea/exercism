@@ -1,22 +1,23 @@
+require 'awesome_print'
+
 class Fixnum
   def to_roman
-    num = self
-    raise ArgumentError if num > 3e3
-    num_order = num.to_s.chars.count
+    raise ArgumentError if self > 3e3
+    num_order    = self.to_s.chars.count
+    num_reversed = self.to_s.reverse
     roman_num = ""
     (0..3).to_a.reverse.each do |order|
-      roman_num << get_num(num % (order) / (order - 1), order) if order < num_order
+      roman_num << get_num(num_reversed[order].to_i, order) if order < num_order
     end
     roman_num
   end
 
-  def get_num(num, order)
+  def get_num(n, order)
     roman_chars = numerals(order)
-    n = num % 10**order
     return roman_chars[:one]*n                           if n <= 3
     return roman_chars[:one]  << roman_chars[:five]      if n == 4
-    return roman_chars[:five] << roman_chars[:one]*(5-n) if n <= 8
-    return roman_chars[:one]  <<  roman_chars[:one]      if n == 9
+    return roman_chars[:five] << roman_chars[:one]*(n-5) if n <= 8
+    return roman_chars[:one]  << roman_chars[:ten]       if n == 9
   end
 
   def numerals(order)
@@ -25,7 +26,8 @@ class Fixnum
     return {one: "C", five: "D", ten: "M"} if order == 2
     return {one: "M"}                      if order == 3
   end
+end
 
-
-
+module BookKeeping
+  VERSION = 2
 end

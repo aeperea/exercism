@@ -6,9 +6,7 @@ class Clock :
         return "{0}:{1}".format(self.add_zero(self._hour), self.add_zero(self._minutes))
 
     def __eq__(self, other) :
-        if self._hour    != other._hour:    return False
-        if self._minutes != other._minutes: return False
-        return True
+        return self._hour == other._hour and self._minutes == other._minutes
 
     def add_zero(self, num) :
         if num >= 10 :

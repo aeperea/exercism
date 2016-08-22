@@ -1,5 +1,3 @@
-require 'awesome_print'
-
 class Series
   def initialize(str)
     @str = str

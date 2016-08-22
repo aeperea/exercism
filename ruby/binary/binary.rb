@@ -1,5 +1,3 @@
-require 'awesome_print'
-
 class Binary
   def initialize(num_bin)
     raise ArgumentError if (num_bin =~ /^(1|0)+$/).nil?

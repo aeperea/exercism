@@ -8,8 +8,6 @@ defmodule Words do
   defp clean_words_and_list(sentence) do
     sentence
     |> String.downcase
-    |> String.replace(~r/[^- [:alnum:]]/u, " ") # matches non alphanum, except - and " "
-    |> String.split(" ")
-    |> Enum.reject(&(&1 == "")) # too much whitespace, cleaning
+    |> String.split(~r/[^[:alnum:]-]/u, trim: true)
   end
 end

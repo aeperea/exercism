@@ -1,12 +1,12 @@
-"use strict";
-
-class Bob {
-  phrases : {
-    yell:      'Whoa, chill out!',
-    question:  'Sure.',
-    silence:   'Fine. Be that way!',
-    whatever:  'Whatever.'
-  };
+export default class Bob {
+  constructor(){
+    this.phrases = {
+      yell:      'Whoa, chill out!',
+      question:  'Sure.',
+      silence:   'Fine. Be that way!',
+      whatever:  'Whatever.'
+    };
+  }
 
   hey(input){
     if (this.isSilence(input))  {return this.phrases["silence"]; }
@@ -16,7 +16,7 @@ class Bob {
   }
   isQuestion(input){
     let re = /\?$/;
-    return !re.test(input)
+    return re.test(input)
   }
   isYelling(input){
     let re = /[a-zA-Z]/;
@@ -27,5 +27,3 @@ class Bob {
     return !re.test(input)
   }
 }
-
-module.exports = Bob;

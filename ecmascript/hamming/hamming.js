@@ -3,10 +3,9 @@ export default class Hamming {
     if (str1.length !== str2.length) {
       throw new Error('DNA strands must be of equal length.');
     }
-    let mismatches = 0;
-    for (let i = 0; i < str1.length; i++) {
-      if (str1[i] !== str2[i]) { mismatches++; }
-    }
-    return mismatches;
+    return str1.split("").reduce((o, v, i) => {
+      if (str1[i] !== str2[i]) {return o + 1;}
+      return o;
+    }, 0);
   }
 }

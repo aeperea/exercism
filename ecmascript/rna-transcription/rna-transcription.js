@@ -3,7 +3,7 @@ export default class Transcriptor {
     this.dnaMapping = {'C':'G', 'G':'C', 'A':'U', 'T':'A'};
   }
   toRna(str){
-    return str.split("").map((nucl) => {
+    return [...str].map((nucl) => {
       return this.dnaMapping[nucl];
     }).join("")
   }

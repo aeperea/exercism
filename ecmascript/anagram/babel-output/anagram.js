@@ -12,42 +12,27 @@ var Anagram = (function () {
   function Anagram(word) {
     _classCallCheck(this, Anagram);
 
-    this.word = word.toLowerCase();
+    this.word = word;
   }
 
   _createClass(Anagram, [{
     key: "matches",
-    value: function matches(wordList) {
+    value: function matches() {
       var _this = this;
 
-      if (typeof wordList !== "object") {
-        wordList = Object.values(arguments);
+      for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+        args[_key] = arguments[_key];
       }
 
-      var matches = [];
-      wordList.forEach(function (word) {
-        var smallWord = word.toLowerCase();
-
-        if (smallWord.length !== _this.word.length) {
-          return;
-        }
-        if (smallWord === _this.word) {
-          return;
-        }
-
-        if (_this.order(smallWord) === _this.order(_this.word)) {
-          matches.push(word);
-        }
+      var wordList = args[0].constructor === Array ? args[0] : args;
+      return wordList.filter(function (word) {
+        return _this.word.toLowerCase() !== word.toLowerCase() && _this.word.length === word.length && _this.sort(_this.word) === _this.sort(word);
       });
-
-      return matches;
     }
   }, {
-    key: "order",
-    value: function order(string) {
-      return string.split("").sort(function (a, b) {
-        return a > b;
-      }).join("");
+    key: "sort",
+    value: function sort(string) {
+      return string.toLowerCase().split("").sort().join("");
     }
   }]);
 

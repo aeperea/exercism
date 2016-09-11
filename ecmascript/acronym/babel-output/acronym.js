@@ -6,7 +6,7 @@ Object.defineProperty(exports, '__esModule', {
 exports['default'] = {
   parse: function parse(str) {
     return str.replace(/([a-z])([A-Z])/g, '$1 $2').split(/[\s\-]/).map(function (w) {
-      return w.substr(0, 1).toUpperCase();
+      return w[0].toUpperCase();
     }).join('');
   }
 };

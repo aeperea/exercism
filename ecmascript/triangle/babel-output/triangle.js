@@ -12,28 +12,20 @@ var Triangle = (function () {
   function Triangle(a, b, c) {
     _classCallCheck(this, Triangle);
 
-    this.a = a;
-    this.b = b;
-    this.c = c;
-    this.sides = [a, b, c];
+    this.sides = [a, b, c].sort(function (a, b) {
+      return a > b;
+    });
   }
 
   _createClass(Triangle, [{
     key: 'kind',
     value: function kind() {
-      var _this = this;
-
       this.checkInequality();
-      if (this.sides.filter(function (side) {
-        return side === _this.a;
-      }).length === 3) {
+      var s = this.sides;
+      if (s[0] === s[2]) {
         return 'equilateral';
       }
-      if (this.sides.filter(function (side) {
-        return side === _this.a;
-      }).length === 2 || this.sides.filter(function (side) {
-        return side === _this.b;
-      }).length === 2) {
+      if (s[0] === s[1] || s[1] === s[2]) {
         return 'isosceles';
       }
       return 'scalene';
@@ -41,17 +33,8 @@ var Triangle = (function () {
   }, {
     key: 'checkInequality',
     value: function checkInequality() {
-      if (this.a <= 0 || this.b <= 0 || this.c <= 0) {
-        throw new Error();
-        return;
-      }
-      if (this.a + this.b < this.c) {
-        throw new Error();return;
-      }
-      if (this.b + this.c < this.a) {
-        throw new Error();return;
-      }
-      if (this.c + this.a < this.b) {
+      var s = this.sides;
+      if (s[0] + s[1] <= s[2]) {
         throw new Error();return;
       }
     }

@@ -1,19 +1,8 @@
-const transform = (data) => {
-  const flatten = (arr) => {
-    return [].concat.apply([], arr);
-  }
-
-  let letters  = flatten(Object.values(data));
-  let keys     = Object.keys(data);
-
-  return letters.reduce((o,v,i) => {
-    for (let j = 0; j < keys.length; j++) {
-      if (data[keys[j]].includes(v)) {
-        o[v.toLowerCase()] = Number(keys[j]);
-      }
-    }
+export default (data) => {
+  return Object.keys(data).reduce((o,v) => {
+    data[v].forEach(letter => {
+      o[letter.toLowerCase()] = Number(v);
+    });
     return o;
   }, {});
 };
-
-export default transform;

@@ -2,14 +2,10 @@ import BigInt from './big-integer';
 
 export default class Grains {
   square(n) {
-    let base = new BigInt(2);
-    return String(base.pow(n-1));
+    return String(BigInt(2).pow(n-1));
   }
   total() {
-    let total = new BigInt(this.square(65));
-    total = total.minus(1);
+    let total = BigInt(this.square(65)).minus(1);
     return String(total);
   }
 }
-
-

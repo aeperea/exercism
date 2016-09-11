@@ -22,14 +22,12 @@ var Grains = (function () {
   _createClass(Grains, [{
     key: 'square',
     value: function square(n) {
-      var base = new _bigInteger2['default'](2);
-      return String(base.pow(n - 1));
+      return String((0, _bigInteger2['default'])(2).pow(n - 1));
     }
   }, {
     key: 'total',
     value: function total() {
-      var total = new _bigInteger2['default'](this.square(65));
-      total = total.minus(1);
+      var total = (0, _bigInteger2['default'])(this.square(65)).minus(1);
       return String(total);
     }
   }]);

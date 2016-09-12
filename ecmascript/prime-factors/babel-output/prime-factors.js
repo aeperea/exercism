@@ -17,14 +17,10 @@ var PrimeFactors = (function () {
     key: "for",
     value: function _for(n) {
       var primes = [];
-      var factor = 2;
-
-      while (factor <= n) {
-        if (n % factor === 0) {
-          primes.push(factor);
-          n = n / factor;
-        } else {
-          factor++;
+      for (var i = 2; i <= n; i++) {
+        while (n % i === 0) {
+          primes.push(i);
+          n /= i;
         }
       }
       return primes;

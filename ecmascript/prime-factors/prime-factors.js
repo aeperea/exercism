@@ -1,14 +1,10 @@
 export default class PrimeFactors {
   for(n){
     let primes = [];
-    let factor = 2;
-
-    while (factor <= n) {
-      if (n % factor === 0) {
-        primes.push(factor);
-        n = n / factor;
-      } else {
-        factor++;
+    for(let i = 2; i <= n; i++) {
+      while(n % i === 0) {
+        primes.push(i);
+        n /= i;
       }
     }
     return primes;

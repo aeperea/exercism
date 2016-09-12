@@ -1,34 +1,26 @@
-export default (num) => {
-  let romanNum    = [];
-  let reversedNum = [...num.toString()].reverse();
-  let maxOrder    = reversedNum.length;
-  for (let order = 3; order >= 0 ; order--) {
-    if (order < maxOrder) {
-      romanNum.push(getRomanNumber(Number(reversedNum[order]), order))
+export default (n) => {
+  let romanNum = [];
+  numerals.forEach((num) => {
+    while(n >= num.value) {
+      romanNum.push(num.numeral);
+      n -= num.value;
     }
-  }
+  });
   return romanNum.join("");
 };
 
-const getRomanNumber = (n, order) => {
-  let romanChars = numerals(order);
-  if (n <= 3) {return mult(romanChars['one'], n);}
-  if (n == 4) {return romanChars['one']  + romanChars['five'];}
-  if (n <= 8) {return romanChars['five'] + mult(romanChars['one'], n-5);}
-  if (n == 9) {return romanChars['one']  + romanChars['ten'];}
-}
-
-const mult = (c, n) => {
-  let letters = [];
-  for (let i = 0; i < n; i++) {
-    letters.push(c);
-  }
-  return letters.join("");
-}
-
-const numerals = order => {
-  if (order === 0) {return {one: "I", five: "V", ten: "X"};}
-  if (order === 1) {return {one: "X", five: "L", ten: "C"};}
-  if (order === 2) {return {one: "C", five: "D", ten: "M"};}
-  if (order === 3) {return {one: "M"};}
-}
+const numerals = [
+  { value: 1000, numeral: 'M' },
+  { value: 900, numeral: 'CM' },
+  { value: 500, numeral: 'D' },
+  { value: 400, numeral: 'CD' },
+  { value: 100, numeral: 'C' },
+  { value: 90, numeral: 'XC' },
+  { value: 50, numeral: 'L' },
+  { value: 40, numeral: 'XL' },
+  { value: 10, numeral: 'X' },
+  { value: 9, numeral: 'IX' },
+  { value: 5, numeral: 'V' },
+  { value: 4, numeral: 'IV' },
+  { value: 1, numeral: 'I' }
+];

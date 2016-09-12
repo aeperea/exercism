@@ -4,56 +4,16 @@ Object.defineProperty(exports, '__esModule', {
   value: true
 });
 
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) arr2[i] = arr[i]; return arr2; } else { return Array.from(arr); } }
-
-exports['default'] = function (num) {
+exports['default'] = function (n) {
   var romanNum = [];
-  var reversedNum = [].concat(_toConsumableArray(num.toString())).reverse();
-  var maxOrder = reversedNum.length;
-  for (var order = 3; order >= 0; order--) {
-    if (order < maxOrder) {
-      romanNum.push(getRomanNumber(Number(reversedNum[order]), order));
+  numerals.forEach(function (num) {
+    while (n >= num.value) {
+      romanNum.push(num.numeral);
+      n -= num.value;
     }
-  }
+  });
   return romanNum.join("");
 };
 
-var getRomanNumber = function getRomanNumber(n, order) {
-  var romanChars = numerals(order);
-  if (n <= 3) {
-    return mult(romanChars['one'], n);
-  }
-  if (n == 4) {
-    return romanChars['one'] + romanChars['five'];
-  }
-  if (n <= 8) {
-    return romanChars['five'] + mult(romanChars['one'], n - 5);
-  }
-  if (n == 9) {
-    return romanChars['one'] + romanChars['ten'];
-  }
-};
-
-var mult = function mult(c, n) {
-  var letters = [];
-  for (var i = 0; i < n; i++) {
-    letters.push(c);
-  }
-  return letters.join("");
-};
-
-var numerals = function numerals(order) {
-  if (order === 0) {
-    return { one: "I", five: "V", ten: "X" };
-  }
-  if (order === 1) {
-    return { one: "X", five: "L", ten: "C" };
-  }
-  if (order === 2) {
-    return { one: "C", five: "D", ten: "M" };
-  }
-  if (order === 3) {
-    return { one: "M" };
-  }
-};
+var numerals = [{ value: 1000, numeral: 'M' }, { value: 900, numeral: 'CM' }, { value: 500, numeral: 'D' }, { value: 400, numeral: 'CD' }, { value: 100, numeral: 'C' }, { value: 90, numeral: 'XC' }, { value: 50, numeral: 'L' }, { value: 40, numeral: 'XL' }, { value: 10, numeral: 'X' }, { value: 9, numeral: 'IX' }, { value: 5, numeral: 'V' }, { value: 4, numeral: 'IV' }, { value: 1, numeral: 'I' }];
 module.exports = exports['default'];

@@ -12,7 +12,7 @@ export default class SecretHandshake {
     return false;
   }
   commands() {
-    let bin = parseInt(this.hex, 16).toString(2);
+    let bin = this.hex.toString(2);
     let willReverse = false;
     let sequence = [];
 

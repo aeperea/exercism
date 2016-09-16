@@ -33,7 +33,7 @@ var SecretHandshake = (function () {
   }, {
     key: 'commands',
     value: function commands() {
-      var bin = parseInt(this.hex, 16).toString(2);
+      var bin = this.hex.toString(2);
       var willReverse = false;
       var sequence = [];
 

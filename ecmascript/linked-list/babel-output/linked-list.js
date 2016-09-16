@@ -3,102 +3,83 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
-var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-var Node = function Node(value) {
+var Node = function Node(val) {
   var prev = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
   var next = arguments.length <= 2 || arguments[2] === undefined ? null : arguments[2];
 
-  _classCallCheck(this, Node);
-
-  this.prev = prev;
-  this.next = next;
-  this.value = value;
+  return {
+    val: val,
+    prev: prev,
+    next: next
+  };
 };
 
-var LinkedList = (function () {
-  function LinkedList() {
-    _classCallCheck(this, LinkedList);
+var LinkedList = function LinkedList() {
+  var head = null,
+      tail = null,
+      size = 0;
 
-    this.head = null;
-    this.tail = null;
-    this.size = 0;
-  }
+  var push = function push(n) {
+    head ? tail = tail.next = new Node(n, tail, null) : head = tail = new Node(n);
+    size++;
+  };
 
-  _createClass(LinkedList, [{
-    key: "push",
-    value: function push(n) {
-      this.head ? this.tail = this.tail.next = new Node(n, this.tail) : this.head = this.tail = new Node(n);
-      this.size++;
+  var pop = function pop() {
+    if (size === 0) {
+      return undefinded;
     }
-  }, {
-    key: "pop",
-    value: function pop() {
-      if (this.size === 0) {
-        return undefined;
-      };
-      var value = this.tail.value;
 
-      if (this.tail.prev) {
-        this.tail.prev.next = null;
-      }
-      this.tail = this.tail.prev;
-      if (!this.tail) {
-        this.head = null;
-      }
-      this.size--;
-      return value;
+    var val = tail.val;
+    if (tail.prev) {
+      tail.prev.next = null;
     }
-  }, {
-    key: "unshift",
-    value: function unshift(n) {
-      this.head ? this.head = this.head.prev = new Node(n, null, this.head) : this.head = this.tail = new Node(n);
-      this.size++;
+    tail = tail.prev;
+    if (!tail) {
+      head = null;
     }
-  }, {
-    key: "shift",
-    value: function shift() {
-      if (this.size === 0) {
-        return undefined;
-      };
-      var value = this.head.value;
+    size--;
 
-      if (this.head.next) {
-        this.head.next.prev = null;
-      }
-      this.head = this.head.next;
-      if (!this.head) {
-        this.tail = null;
-      }
-      this.size--;
-      return value;
-    }
-  }, {
-    key: "delete",
-    value: function _delete(val) {
-      var current = this.head;
-      while (current != null) {
-        if (current.value === val) {
-          current.prev ? current.prev.next = current.next : this.head = this.head.next;
-          current.next ? current.next.prev = current.prev : this.tail = this.tail.prev;
-          this.size--;
-          break;
-        }
-        current = current.next;
-      }
-    }
-  }, {
-    key: "count",
-    value: function count() {
-      return this.size;
-    }
-  }]);
+    return val;
+  };
 
-  return LinkedList;
-})();
+  var unshift = function unshift(val) {
+    head ? head = head.prev = new Node(val, null, head) : head = tail = new Node(val);
+    size++;
+  };
+
+  var shift = function shift() {
+    if (size === 0) return undefined;
+
+    var val = head.val;
+    if (head.next) head.next.prev = null;
+    head = head.next;
+    if (!head) tail = null;
+    size--;
+
+    return val;
+  };
+
+  var remove = function remove(val) {
+    var current = head;
+    while (current) {
+      if (current.val === val) {
+        current.prev ? current.prev.next = current.next : head = head.next;
+        current.next ? current.next.prev = current.prev : tail = tail.prev;
+        size--;
+        break;
+      }
+      current = current.next;
+    }
+  };
+
+  return {
+    push: push, pop: pop, shift: shift, unshift: unshift,
+    "delete": remove,
+    count: function count() {
+      return size;
+    }
+  };
+};
 
 exports["default"] = LinkedList;
 module.exports = exports["default"];

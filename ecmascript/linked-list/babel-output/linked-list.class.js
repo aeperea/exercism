@@ -1,3 +1,5 @@
+"use strict";
+
 // class Node {
 //   constructor(value, prev = null, next = null) {
 //     this.prev  = prev;
@@ -64,7 +66,6 @@
 //     return this.size;
 //   }
 // }
-
 
 // class Node {
 //   constructor(value, prev = null, next = null) {

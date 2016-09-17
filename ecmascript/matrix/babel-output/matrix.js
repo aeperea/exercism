@@ -4,22 +4,16 @@ Object.defineProperty(exports, '__esModule', {
   value: true
 });
 var Matrix = function Matrix(str) {
-  var matrix = str.split('\n').map(function (n) {
+  var rows = str.split('\n').map(function (n) {
     return n.split(' ').map(Number);
   });
+  var columns = rows[0].map(function (_, i) {
+    return rows.map(function (n) {
+      return n[i];
+    });
+  });
 
-  var transpose = [];
-  for (var i = 0; i < matrix[0].length; i++) {
-    transpose[i] = [];
-    for (var j = 0; j < matrix.length; j++) {
-      transpose[i].push(matrix[j][i]);
-    }
-  }
-
-  return {
-    rows: matrix,
-    columns: transpose
-  };
+  return Object.freeze({ rows: rows, columns: columns });
 };
 
 exports['default'] = Matrix;

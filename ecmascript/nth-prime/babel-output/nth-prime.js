@@ -18,17 +18,17 @@ var Prime = function Prime() {
       throw new Error('Prime is not possible');return;
     }
     var i = 1;
-    var nthFound = 2;
-    var number = 3;
+    var j = 0;
 
-    while (i !== n) {
-      if (isPrime(number)) {
-        i++;
-        nthFound = number;
+    while (true) {
+      i++;
+      if (isPrime(i)) {
+        j++;
+        if (j === n) {
+          return i;
+        }
       }
-      number++;
     }
-    return nthFound;
   };
 
   return { nth: nth };

@@ -8,18 +8,16 @@ const isPrime = n => {
 const Prime = () => {
   const nth = n => {
     if (n < 1) {throw new Error('Prime is not possible'); return;}
-    let i        = 1;
-    let nthFound = 2;
-    let number   = 3;
+    let i = 1;
+    let j = 0;
 
-    while (i !== n) {
-      if (isPrime(number)) {
-        i++;
-        nthFound = number;
+    while (true) {
+      i++;
+      if (isPrime(i)) {
+        j++;
+        if (j === n) { return i; }
       }
-      number++;
     }
-    return nthFound;
   }
 
   return {nth}

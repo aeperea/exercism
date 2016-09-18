@@ -18,7 +18,6 @@ export default class Triangle {
         }
       }
     }
-    
     this.lastRow = this.rows[this.totalRows - 1];
   }
 }

@@ -7,6 +7,21 @@ var Ocr = function Ocr() {
 
   var convert = function convert(input) {
     var lines = input.split('\n');
+
+    if (lines.length > 4) {
+      var multiLines = lines.length / 4;
+      var newLines = [];
+      for (var i = 0; i < multiLines; i++) {
+        var section = lines.slice(i * 4, (i + 1) * 4);
+        newLines.push(threeRowAnalysis(section));
+      }
+      return newLines.join(',');
+    } else {
+      return threeRowAnalysis(lines);
+    }
+  };
+
+  var threeRowAnalysis = function threeRowAnalysis(lines) {
     var transcription = [];
 
     lines.forEach(function (line, lineIndex) {
@@ -23,10 +38,7 @@ var Ocr = function Ocr() {
 
     return transcription.map(function (num) {
       var matchIndex = numsArr.indexOf(num);
-      if (matchIndex < 0) {
-        return '?';
-      }
-      return String(matchIndex);
+      return matchIndex < 0 ? '?' : matchIndex.toString();
     }).join('');
   };
 

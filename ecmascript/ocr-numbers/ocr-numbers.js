@@ -2,6 +2,22 @@ const Ocr = () => {
 
   const convert = input => {
     let lines = input.split('\n');
+
+    if (lines.length > 4) {
+      let multiLines = lines.length / 4;
+      let newLines = [];
+      for (let i = 0; i < multiLines; i++) {
+        let section = lines.slice(i * 4, (i + 1)*4)
+        newLines.push(threeRowAnalysis(section))
+      }
+      return newLines.join(',');
+    } else {
+      return threeRowAnalysis(lines);
+    }
+
+  }
+
+  const threeRowAnalysis = (lines) => {
     let transcription = [];
 
     lines.forEach((line, lineIndex) => {
@@ -14,10 +30,7 @@ const Ocr = () => {
 
     return transcription.map(num => {
       let matchIndex = numsArr.indexOf(num);
-      if (matchIndex < 0) {
-        return '?'
-      }
-      return String(matchIndex);
+      return (matchIndex < 0) ? '?' : matchIndex.toString()
     }).join('');
   }
 

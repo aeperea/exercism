@@ -3,12 +3,8 @@
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
-var max = function max(arr) {
-  return Math.max.apply(Math, arr);
-};
-var min = function min(arr) {
-  return Math.min.apply(Math, arr);
-};
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) arr2[i] = arr[i]; return arr2; } else { return Array.from(arr); } }
 
 var Matrix = function Matrix(str) {
 
@@ -20,21 +16,15 @@ var Matrix = function Matrix(str) {
       return n[i];
     });
   });
-  var saddlePoints = [];
 
-  var getSaddlePoints = (function () {
-    rows.forEach(function (row, i) {
-      var largest = max(row);
-      row.forEach(function (el, j) {
-        if (el === largest) {
-          var smallest = min(columns[j]);
-          if (smallest === el) {
-            saddlePoints.push([i, j]);
-          }
-        }
-      });
+  var saddlePoints = rows.reduce(function (o, row, i) {
+    var max = Math.max.apply(Math, _toConsumableArray(row));
+    row.forEach(function (el, j) {
+      if (el !== max) return;
+      if (Math.min.apply(Math, _toConsumableArray(columns[j])) === el) o.push([i, j]);
     });
-  })();
+    return o;
+  }, []);
 
   return {
     rows: rows,

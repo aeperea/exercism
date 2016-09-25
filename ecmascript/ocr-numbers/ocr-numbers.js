@@ -14,7 +14,6 @@ const Ocr = () => {
     } else {
       return threeRowAnalysis(lines);
     }
-
   }
 
   const threeRowAnalysis = (lines) => {

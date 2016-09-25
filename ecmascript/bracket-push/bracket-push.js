@@ -20,5 +20,4 @@ const checkLast = (bracket, opened) => {
 }
 
 const maps = {'{':'}', '[':']', '(':')'};
-
 const sum = arr => arr.reduce((o,v) => (o + v), 0);

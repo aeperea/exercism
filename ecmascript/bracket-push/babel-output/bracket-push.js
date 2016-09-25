@@ -36,16 +36,12 @@ exports['default'] = function (str) {
 
 var checkLast = function checkLast(bracket, opened) {
   var lastOpen = opened[opened.length - 1];
-  if (lastOpen === '{' && bracket === '}') {
-    opened.pop();return;
-  }
-  if (lastOpen === '[' && bracket === ']') {
-    opened.pop();return;
-  }
-  if (lastOpen === '(' && bracket === ')') {
+  if (maps[lastOpen] === bracket) {
     opened.pop();return;
   }
 };
+
+var maps = { '{': '}', '[': ']', '(': ')' };
 
 var sum = function sum(arr) {
   return arr.reduce(function (o, v) {

@@ -16,9 +16,9 @@ export default (str) => {
 
 const checkLast = (bracket, opened) => {
   let lastOpen = opened[opened.length - 1];
-  if (lastOpen === '{' && bracket === '}') {opened.pop(); return;}
-  if (lastOpen === '[' && bracket === ']') {opened.pop(); return;}
-  if (lastOpen === '(' && bracket === ')') {opened.pop(); return;}
+  if (maps[lastOpen] === bracket) {opened.pop(); return;}
 }
+
+const maps = {'{':'}', '[':']', '(':')'};
 
 const sum = arr => arr.reduce((o,v) => (o + v), 0);

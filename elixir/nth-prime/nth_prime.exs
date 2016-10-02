@@ -2,16 +2,14 @@ defmodule Prime do
 
   def nth(goal), do: get_nth_prime(2, 1, goal)
 
+  defp is_prime(n) when n <= 3, do: true
+
   defp is_prime(n) do
-    if n <= 3 do
-      true
-    else
-      last = :math.sqrt(n) |> Float.floor |> round
-      not (2..last |> Enum.any?(&(rem(n, &1) == 0)))
-    end
+    last = :math.sqrt(n) |> Float.floor |> round
+    not (2..last |> Enum.any?(&(rem(n, &1) == 0)))
   end
 
-  defp get_nth_prime(_, _, goal) when goal < 1, do: raise "error"
+  defp get_nth_prime(_, _, goal) when goal < 1, do: raise ArgumentError
 
   defp get_nth_prime(num, goal, goal), do: num
 

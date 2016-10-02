@@ -1,21 +1,20 @@
 defmodule Prime do
 
-  def nth(goal), do: get_nth_prime(2, 1, goal)
-
-  defp is_prime(n) when n <= 3, do: true
-
-  defp is_prime(n) do
-    last = :math.sqrt(n) |> Float.floor |> round
-    not (2..last |> Enum.any?(&(rem(n, &1) == 0)))
+  @doc """
+  Generates the nth prime.
+  """
+  @spec nth(non_neg_integer) :: non_neg_integer
+  def nth(0) do raise "nope" end
+  def nth(count) do
+    Stream.iterate(2, &(&1 + 1))
+    |> Stream.filter(&prime?/1)
+    |> Enum.at(count - 1)
   end
 
-  defp get_nth_prime(_, _, goal) when goal < 1, do: raise ArgumentError
-
-  defp get_nth_prime(num, goal, goal), do: num
-
-  defp get_nth_prime(num, count, goal) do
-    new_count = if is_prime(num + 1), do: count + 1, else: count
-    get_nth_prime(num + 1, new_count, goal)
+  @spec prime?(non_neg_integer) :: boolean
+  def prime?(2) do true end
+  def prime?(number) do
+    max_factor = round(:math.sqrt(number))
+    not Enum.any?(2..max_factor, fn x -> rem(number, x) === 0 end)
   end
-
 end

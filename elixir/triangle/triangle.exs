@@ -14,8 +14,9 @@ defmodule Triangle do
   defp get_kind(a, b, c) when not are_all_positive(a, b, c), do: {:error, "all side lengths must be positive"}
   defp get_kind(a, b, c) when not is_valid(a, b, c), do: {:error, "side lengths violate triangle inequality"}
 
-  defp get_kind(a, a, a) when are_all_positive(a, a, a) and is_valid(a, a, a), do: {:ok, :equilateral}
-  defp get_kind(a, b, b) when are_all_positive(a, b, b) and is_valid(a, b, b), do: {:ok, :isosceles}
-  defp get_kind(a, b, c) when are_all_positive(a, b, c) and is_valid(a, b, c), do: {:ok, :scalene}
-
+  defp get_kind(a, a, a), do: {:ok, :equilateral}
+  defp get_kind(_, a, a), do: {:ok, :isosceles}
+  defp get_kind(a, _, a), do: {:ok, :isosceles}
+  defp get_kind(a, a, _), do: {:ok, :isosceles}
+  defp get_kind(_, _, _), do: {:ok, :scalene}
 end

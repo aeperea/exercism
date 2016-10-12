@@ -9,7 +9,8 @@ defmodule School do
   end
 
   def sort(db) do
-    Map.keys(db)
+    db
+    |> Map.keys
     |> Enum.map(&( {&1, Enum.sort(grade(db, &1))} ))
   end
 

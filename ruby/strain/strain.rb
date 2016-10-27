@@ -1,0 +1,13 @@
+class Array
+  def keep
+    res = []
+    each { |i| res << i if (yield i) }
+    res
+  end
+
+  def discard
+    res = []
+    each { |i| res << i unless (yield i) }
+    res
+  end
+end

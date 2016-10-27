@@ -1,4 +1,4 @@
-class Array
+module Strain
   def keep
     res = []
     each { |i| res << i if (yield i) }
@@ -10,4 +10,8 @@ class Array
     each { |i| res << i unless (yield i) }
     res
   end
+end
+
+class Array
+  include Strain
 end

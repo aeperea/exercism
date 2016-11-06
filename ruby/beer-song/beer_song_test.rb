@@ -371,6 +371,7 @@ Go to the store and buy some more, 99 bottles of beer on the wall.
   # The version number refers to the version of the problem you solved,
   # not your solution.
   #
+
   # Define a constant named VERSION inside of BookKeeping.
   def test_bookkeeping
     

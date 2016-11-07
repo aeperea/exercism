@@ -26,14 +26,7 @@ class BeerSong
   end
 
   def verses(from = 99, til = 0)
-    song = ""
-    i    = from
-    while i >= til do
-      song += verse(i)
-      song += "\n" if i != 0 && i != til
-      i -= 1
-    end
-    song
+    (til..from).to_a.reverse.map{ |i| verse(i) }.join("\n")
   end
 
   def lyrics

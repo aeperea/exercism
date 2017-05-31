@@ -41,3 +41,5 @@ npm-debug.log
 
 *.tern-port
 dump.rdb
+
+elm-stuff/
